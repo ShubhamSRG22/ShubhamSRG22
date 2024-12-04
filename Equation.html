@@ -55,6 +55,29 @@
       color: #bdc3c7;
     }
 
+    .typewriter {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #ecf0f1;
+      animation: blinkCursor 0.75s step-end infinite;
+    }
+
+    @keyframes blinkCursor {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    @keyframes typewriter {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+
     footer {
       margin-top: 30px;
       font-size: 1rem;
@@ -97,15 +120,51 @@
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
     <div id="typewriter-container">
-      <p>Life is an ∞ illusionary cycle.</p>
-      <p>↓(S→Ƨ)↑ represents the loop we are stuck in.</p>
-      <p>To break free from this endless cycle,</p>
-      <p>intervention Δ is required to enlighten E.</p>
+      <p class="typewriter" id="line1"></p>
+      <p class="typewriter" id="line2"></p>
+      <p class="typewriter" id="line3"></p>
+      <p class="typewriter" id="line4"></p>
     </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
       This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online sources.
     </footer>
   </div>
+
+  <script>
+    // Array of lines to be typed
+    const lines = [
+      "Life is an ∞ illusionary cycle.",
+      "↓(S→Ƨ)↑ represents the loop we are stuck in.",
+      "To break free from this endless cycle,",
+      "intervention Δ is required to enlighten E."
+    ];
+
+    // Function to create the typewriter effect for each line
+    function typeLine(line, elementId, delay, callback) {
+      const element = document.getElementById(elementId);
+      element.style.animation = `typewriter ${line.length * 0.1}s steps(${line.length}) ${delay}s forwards`;
+
+      // Add the content as the typing progresses
+      setTimeout(() => {
+        element.textContent = line;
+        if (callback) callback();
+      }, delay * 1000 + line.length * 100);
+    }
+
+    // Start the typewriter animation for each line sequentially
+    function startTypewriter() {
+      typeLine(lines[0], "line1", 0.5, () => {
+        typeLine(lines[1], "line2", 2.5, () => {
+          typeLine(lines[2], "line3", 4.5, () => {
+            typeLine(lines[3], "line4", 6.5);
+          });
+        });
+      });
+    }
+
+    // Start the typewriter effect when the page loads
+    window.onload = startTypewriter;
+  </script>
 </body>
 </html>
