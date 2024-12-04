@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Equation of Enlightenment</title>
   <style>
     /* Reset styles */
     * {
@@ -17,19 +18,21 @@
       background-size: cover;
       color: #fff;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       height: 100vh;
       text-align: center;
       overflow: hidden;
+      padding: 10px;
     }
 
     .container {
-      padding: 30px;
+      padding: 20px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 15px;
-      max-width: 900px;
-      width: 90%;
+      max-width: 800px;
+      width: 100%;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
       animation: fadeIn 2s ease-out;
     }
@@ -50,5 +53,120 @@
       margin-bottom: 15px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      white-space: nowrap;
-     
+    }
+
+    .equation {
+      font-size: 1.5rem;
+      font-family: 'Courier New', Courier, monospace;
+      margin: 20px 0;
+      color: #e74c3c;
+      text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
+    }
+
+    .typewriter-container {
+      margin: 20px 0;
+      text-align: left;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      color: #ecf0f1;
+    }
+
+    .typewriter-line {
+      display: block;
+      border-right: 2px solid orange; /* Blinking cursor effect */
+      animation: blinkCursor 0.75s step-end infinite;
+    }
+
+    @keyframes blinkCursor {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    footer {
+      font-size: 0.9rem;
+      color: #bdc3c7;
+      margin-top: 10px;
+    }
+
+    footer span {
+      color: #f39c12;
+      font-weight: bold;
+    }
+
+    footer:hover span {
+      color: #3498db;
+      transform: translateY(-3px);
+      transition: all 0.3s ease-in-out;
+    }
+
+    /* Responsive layout */
+    @media screen and (max-width: 768px) {
+      h1 {
+        font-size: 0.9rem;
+      }
+
+      .equation {
+        font-size: 1.2rem;
+      }
+
+      .typewriter-container {
+        font-size: 1rem;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>The Equation of Enlightenment</h1>
+  <div class="container">
+    <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
+    <div id="typewriter-container" class="typewriter-container"></div>
+  </div>
+  <footer>
+    Conceptualized and developed by <span>Shubham Giri</span>.  
+    This formulation represents original thought and imagination, with no reference to prior documentation or online sources.
+  </footer>
+
+  <script>
+    const lines = [
+      "Life is an ∞ illusionary cycle.",
+      "↓(S→Ƨ)↑ represents the loop we are stuck in.",
+      "To break free from this endless cycle,",
+      "intervention Δ is required to enlighten E."
+    ];
+
+    const typewriterContainer = document.getElementById("typewriter-container");
+
+    function typeLine(lineIndex = 0, charIndex = 0) {
+      if (lineIndex < lines.length) {
+        let currentLine = document.querySelector(`#line${lineIndex}`);
+        if (!currentLine) {
+          currentLine = document.createElement("div");
+          currentLine.id = `line${lineIndex}`;
+          currentLine.className = "typewriter-line";
+          typewriterContainer.appendChild(currentLine);
+        }
+        if (charIndex < lines[lineIndex].length) {
+          currentLine.textContent += lines[lineIndex][charIndex];
+          setTimeout(() => typeLine(lineIndex, charIndex + 1), 80);
+        } else {
+          // Stop blinking cursor after line finishes
+          currentLine.style.borderRight = "none";
+          // Start next line after a delay
+          setTimeout(() => typeLine(lineIndex + 1), 500);
+        }
+      }
+    }
+
+    // Start typing on page load
+    window.onload = function () {
+      typeLine();
+    };
+  </script>
+</body>
+</html>
