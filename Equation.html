@@ -28,21 +28,11 @@
 
     .container {
       padding: 20px;
-      background: rgba(0, 0, 0, 0.7);  /* Darker background for readability */
+      background: rgba(0, 0, 0, 0.7); /* Darker background for readability */
       border-radius: 15px;
       max-width: 800px;
       width: 90%;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
-      animation: fadeIn 2s ease-out;
-    }
-
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
     }
 
     h1 {
@@ -64,7 +54,6 @@
 
     .typewriter-container {
       margin-top: 20px; /* Space between equation and typing lines */
-      text-align: left;
       font-size: 1.2rem;
       line-height: 1.6;
       white-space: pre-wrap;
@@ -86,9 +75,9 @@
     footer {
       font-size: 1rem;
       color: #fff;
-      margin-top: 10px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 0px 0px 25px rgba(0, 0, 0, 0.7); /* 3D shadow */
-      background: linear-gradient(to right, #333, #000); /* Gradient for depth */
+      margin-top: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 0px 0px 25px rgba(0, 0, 0, 0.7);
+      background: linear-gradient(to right, #333, #000);
       padding: 10px;
       border-radius: 10px;
     }
@@ -102,25 +91,6 @@
       color: #3498db;
       transform: translateY(-3px);
       transition: all 0.3s ease-in-out;
-    }
-
-    /* Responsive layout */
-    @media screen and (max-width: 768px) {
-      h1 {
-        font-size: 0.9rem;
-      }
-
-      .equation {
-        font-size: 1.2rem;
-      }
-
-      .typewriter-container {
-        font-size: 1rem;
-      }
-
-      footer {
-        font-size: 0.8rem;
-      }
     }
   </style>
 </head>
@@ -158,10 +128,8 @@
           currentLine.textContent += lines[lineIndex][charIndex];
           setTimeout(() => typeLine(lineIndex, charIndex + 1), 100);
         } else {
-          // Stop blinking cursor after line finishes
-          currentLine.style.borderRight = "none";
-          // Start next line after a delay
-          setTimeout(() => typeLine(lineIndex + 1), 500);
+          currentLine.style.borderRight = "none"; // Stop cursor after line finishes
+          setTimeout(() => typeLine(lineIndex + 1), 500); // Start next line
         }
       }
     }
