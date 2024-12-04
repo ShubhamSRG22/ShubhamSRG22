@@ -30,7 +30,6 @@
       border-radius: 15px;
       max-width: 900px;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(10px);
       animation: fadeIn 2s ease-out;
       overflow: hidden;
     }
@@ -68,19 +67,19 @@
       }
     }
 
-    /* Typewriter animation for the paragraph text */
+    /* Typewriter effect for character-by-character typing */
     .typewriter p {
       font-size: 1.4rem;
       line-height: 1.8;
       margin-bottom: 30px;
       color: #ecf0f1;
+      white-space: pre-wrap; /* Ensures the text wraps properly */
       display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: .15em solid orange; /* Create the blinking cursor effect */
-      animation: typewriter 6s steps(60) 1s forwards, blinkCursor 0.75s step-end infinite;
+      border-right: .15em solid orange; /* Blinking cursor effect */
+      animation: typewriter 10s steps(30) 1s forwards, blinkCursor 0.75s step-end infinite;
     }
 
+    /* Add more time in typewriter animation to make it type each character slowly */
     @keyframes typewriter {
       0% {
         width: 0;
@@ -135,11 +134,8 @@
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
     <div class="typewriter">
-      <p>
-        Life is an ∞ illusionary cycle,<br>
-        ↓(S→Ƨ)↑ represents the loop we are stuck in.<br>
-        To break free from this endless cycle,<br>
-        intervention Δ is required to enlighten E.
+      <p id="typewriter-text">
+        Life is an ∞ illusionary cycle. ↓(S→Ƨ)↑ represents the loop we are stuck in. To break free from this endless cycle, intervention Δ is required to enlighten E.
       </p>
     </div>
     <footer>
@@ -147,5 +143,32 @@
       This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online or documented sources.
     </footer>
   </div>
+
+  <script>
+    const textElement = document.getElementById("typewriter-text");
+    const text = textElement.innerText;
+    textElement.innerText = ""; // Clear the text initially
+
+    let charIndex = 0;
+    let lineLength = 30; // Characters per line
+    let typingSpeed = 100; // Speed of typing in ms
+    const totalLength = text.length;
+
+    function typeNextChar() {
+      if (charIndex < totalLength) {
+        textElement.innerText += text[charIndex];
+        charIndex++;
+        setTimeout(typeNextChar, typingSpeed);
+      } else {
+        // Stop blinking cursor once typing is done
+        textElement.style.borderRight = 'none'; // Hide the blinking cursor
+      }
+    }
+
+    // Begin typing when page loads
+    window.onload = function () {
+      typeNextChar();
+    };
+  </script>
 </body>
 </html>
