@@ -156,7 +156,7 @@
         }
         if (charIndex < lines[lineIndex].length) {
           currentLine.textContent += lines[lineIndex][charIndex];
-          setTimeout(() => typeLine(lineIndex, charIndex + 1), 80);
+          setTimeout(() => typeLine(lineIndex, charIndex + 1), 100);
         } else {
           // Stop blinking cursor after line finishes
           currentLine.style.borderRight = "none";
