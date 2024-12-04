@@ -25,11 +25,11 @@
     }
 
     .container {
-      padding: 40px;
+      padding: 30px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 15px;
       max-width: 900px;
-      width: 100%;
+      width: 90%;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
       animation: fadeIn 2s ease-out;
     }
@@ -44,27 +44,27 @@
     }
 
     h1 {
-      font-size: 1.5rem; /* Smaller font size */
-      font-weight: bold; /* Bold text */
-      color: #f39c12; /* Gold-like color */
-      margin-bottom: 20px; /* Add spacing below */
-      text-transform: uppercase; /* Make text uppercase */
-      letter-spacing: 1px; /* Add slight spacing between letters */
-      white-space: nowrap; /* Prevent text wrapping to a new line */
-      text-align: center; /* Center the text */
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #f39c12;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      white-space: nowrap;
+      text-align: center;
     }
 
     .equation {
-      font-size: 3rem;
+      font-size: 2.5rem;
       font-family: 'Courier New', Courier, monospace;
-      margin: 30px 0;
+      margin: 20px 0;
       color: #e74c3c;
       text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
     }
 
     .typewriter-line {
-      font-size: 1.4rem;
-      line-height: 1.8;
+      font-size: 1.2rem;
+      line-height: 1.6;
       color: #ecf0f1;
       white-space: pre-wrap;
       display: block;
@@ -81,8 +81,8 @@
     }
 
     footer {
-      margin-top: 30px;
-      font-size: 1.2rem;
+      margin-top: 20px;
+      font-size: 1rem;
       color: #bdc3c7;
     }
 
@@ -93,27 +93,26 @@
 
     footer:hover span {
       color: #3498db;
-      transform: translateY(-5px);
+      transform: translateY(-3px);
       transition: all 0.3s ease-in-out;
     }
 
     /* Responsive layout */
     @media screen and (max-width: 768px) {
       h1 {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
 
       .equation {
-        font-size: 2.5rem;
+        font-size: 2rem;
       }
 
       .typewriter-line {
-        font-size: 1.2rem;
+        font-size: 1rem;
       }
 
       footer {
-        font-size: 1rem;
-        margin-bottom: 15px;
+        font-size: 0.9rem;
       }
     }
   </style>
@@ -130,7 +129,7 @@
     </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
-      This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online or documented sources.
+      This formulation represents original thought and imagination, with no reference to prior documentation or online sources.
     </footer>
   </div>
 
@@ -149,7 +148,7 @@
         const currentLine = document.getElementById(`line${lineIndex + 1}`);
         if (charIndex < lines[lineIndex].length) {
           currentLine.textContent += lines[lineIndex][charIndex];
-          setTimeout(() => typeLine(lineIndex, charIndex + 1), 100);
+          setTimeout(() => typeLine(lineIndex, charIndex + 1), 80);
         } else {
           // Remove cursor after line is typed
           currentLine.style.borderRight = "none";
