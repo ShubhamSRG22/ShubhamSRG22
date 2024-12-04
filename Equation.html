@@ -20,8 +20,8 @@
       align-items: center;
       justify-content: center;
       height: 100vh;
+      text-align: center;
       overflow: hidden;
-      text-align: center; /* Center text for all devices */
     }
 
     .container {
@@ -31,9 +31,7 @@
       max-width: 900px;
       width: 100%;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
-      overflow: hidden;
       animation: fadeIn 2s ease-out;
-      backdrop-filter: blur(5px);
     }
 
     @keyframes fadeIn {
@@ -46,11 +44,14 @@
     }
 
     h1 {
-      font-size: 2.5rem; /* Medium size for header */
-      color: #f39c12;
-      margin-bottom: 20px; /* Adjusted margin to avoid overlap */
-      text-transform: uppercase;
-      letter-spacing: 2px;
+      font-size: 1.5rem; /* Smaller font size */
+      font-weight: bold; /* Bold text */
+      color: #f39c12; /* Gold-like color */
+      margin-bottom: 20px; /* Add spacing below */
+      text-transform: uppercase; /* Make text uppercase */
+      letter-spacing: 1px; /* Add slight spacing between letters */
+      white-space: nowrap; /* Prevent text wrapping to a new line */
+      text-align: center; /* Center the text */
     }
 
     .equation {
@@ -59,35 +60,17 @@
       margin: 30px 0;
       color: #e74c3c;
       text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
-      animation: equationAnimation 3s ease-in-out infinite;
     }
 
-    @keyframes equationAnimation {
-      0% {
-        transform: scale(1);
-        opacity: 0.5;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 0.5;
-      }
-    }
-
-    /* Typewriter effect for character-by-character typing */
-    .typewriter {
+    .typewriter-line {
       font-size: 1.4rem;
       line-height: 1.8;
       color: #ecf0f1;
       white-space: pre-wrap;
-      display: inline-block;
-      border-right: .15em solid orange; /* Blinking cursor effect */
+      display: block;
+      border-right: 2px solid orange; /* Blinking cursor effect */
+      margin: 10px 0;
       animation: blinkCursor 0.75s step-end infinite;
-      max-width: 90%; /* Ensure text does not overflow */
-      margin: 0 auto;
     }
 
     /* Blink cursor animation */
@@ -99,9 +82,8 @@
 
     footer {
       margin-top: 30px;
-      font-size: 1.2rem; /* Medium size font */
+      font-size: 1.2rem;
       color: #bdc3c7;
-      margin-bottom: 20px; /* Ensures footer doesn't overlap with the content */
     }
 
     footer span {
@@ -118,20 +100,20 @@
     /* Responsive layout */
     @media screen and (max-width: 768px) {
       h1 {
-        font-size: 2rem; /* Adjust font size on smaller screens */
+        font-size: 1.2rem;
       }
 
       .equation {
         font-size: 2.5rem;
       }
 
-      .typewriter {
+      .typewriter-line {
         font-size: 1.2rem;
       }
 
       footer {
-        font-size: 1rem; /* Adjust footer font size */
-        margin-bottom: 15px; /* Reduce bottom margin for smaller screens */
+        font-size: 1rem;
+        margin-bottom: 15px;
       }
     }
   </style>
@@ -141,10 +123,10 @@
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
     <div id="typewriter-container">
-      <div class="typewriter" id="line1"></div>
-      <div class="typewriter" id="line2"></div>
-      <div class="typewriter" id="line3"></div>
-      <div class="typewriter" id="line4"></div>
+      <div class="typewriter-line" id="line1"></div>
+      <div class="typewriter-line" id="line2"></div>
+      <div class="typewriter-line" id="line3"></div>
+      <div class="typewriter-line" id="line4"></div>
     </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
@@ -153,7 +135,6 @@
   </div>
 
   <script>
-    // Text content for each line
     const lines = [
       "Life is an ∞ illusionary cycle.",
       "↓(S→Ƨ)↑ represents the loop we are stuck in.",
@@ -161,51 +142,26 @@
       "intervention Δ is required to enlighten E."
     ];
 
-    // Function to type each line with a typewriter effect
-    function typeLine(line, elementId, callback) {
-      const element = document.getElementById(elementId);
-      let charIndex = 0;
-      let typingSpeed = 100; // Speed of typing in ms
+    const typewriterContainer = document.getElementById("typewriter-container");
 
-      // Typing each character in the line
-      function typeNextChar() {
-        if (charIndex < line.length) {
-          element.innerText += line[charIndex];
-          charIndex++;
-          setTimeout(typeNextChar, typingSpeed);
+    function typeLine(lineIndex = 0, charIndex = 0) {
+      if (lineIndex < lines.length) {
+        const currentLine = document.getElementById(`line${lineIndex + 1}`);
+        if (charIndex < lines[lineIndex].length) {
+          currentLine.textContent += lines[lineIndex][charIndex];
+          setTimeout(() => typeLine(lineIndex, charIndex + 1), 100);
         } else {
-          // Stop the blinking cursor once line is fully typed
-          element.style.borderRight = 'none'; // Hide the blinking cursor
-          callback(); // Call the callback to type the next line
+          // Remove cursor after line is typed
+          currentLine.style.borderRight = "none";
+          // Start typing the next line after a delay
+          setTimeout(() => typeLine(lineIndex + 1), 500);
         }
       }
-
-      // Start typing
-      typeNextChar();
     }
 
-    // Start typing the first line
-    function startTyping() {
-      typeLine(lines[0], "line1", function() {
-        setTimeout(function() {
-          typeLine(lines[1], "line2", function() {
-            setTimeout(function() {
-              typeLine(lines[2], "line3", function() {
-                setTimeout(function() {
-                  typeLine(lines[3], "line4", function() {
-                    // All lines are typed, no more actions needed
-                  });
-                }, 1000); // Delay before typing the next line
-              });
-            }, 1000); // Delay before typing the next line
-          });
-        }, 1000); // Delay before typing the next line
-      });
-    }
-
-    // Start typing when the page loads
-    window.onload = function() {
-      startTyping();
+    // Start typing from the first line
+    window.onload = function () {
+      typeLine();
     };
   </script>
 </body>
