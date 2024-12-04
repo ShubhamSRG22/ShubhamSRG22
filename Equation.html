@@ -18,7 +18,6 @@
       background-size: cover;
       color: #fff;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
       height: 100vh;
@@ -27,12 +26,13 @@
     }
 
     .container {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.7); /* Darker background for readability */
+      text-align: center;
+      padding: 40px;
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 15px;
-      max-width: 800px;
-      width: 90%;
+      max-width: 900px;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
+      overflow: hidden;
     }
 
     h1 {
@@ -40,7 +40,6 @@
       font-weight: bold;
       color: #f39c12;
       margin-bottom: 15px;
-      text-transform: uppercase;
       letter-spacing: 0.5px;
     }
 
@@ -52,17 +51,17 @@
       text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
     }
 
-    .typewriter-container {
-      margin-top: 20px; /* Space between equation and typing lines */
+    #typewriter-container {
+      margin-top: 20px;
       font-size: 1.2rem;
-      line-height: 1.6;
-      white-space: pre-wrap;
+      line-height: 1.8;
       color: #ecf0f1;
     }
 
-    .typewriter-line {
+    .typewriter {
       display: block;
-      border-right: 2px solid orange; /* Blinking cursor effect */
+      white-space: pre-wrap;
+      border-right: 2px solid orange; /* Blinking cursor */
       animation: blinkCursor 0.75s step-end infinite;
     }
 
@@ -73,13 +72,10 @@
     }
 
     footer {
+      margin-top: 30px;
       font-size: 1rem;
-      color: #fff;
-      margin-top: 20px;
-      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7), 0px 0px 25px rgba(0, 0, 0, 0.7);
-      background: linear-gradient(to right, #333, #000);
-      padding: 10px;
-      border-radius: 10px;
+      color: #bdc3c7;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
     }
 
     footer span {
@@ -92,20 +88,42 @@
       transform: translateY(-3px);
       transition: all 0.3s ease-in-out;
     }
+
+    /* Responsive design */
+    @media screen and (max-width: 768px) {
+      .container {
+        padding: 20px;
+        max-width: 100%;
+      }
+
+      .equation {
+        font-size: 1.2rem;
+      }
+
+      #typewriter-container {
+        font-size: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>The Equation of Enlightenment</h1>
   <div class="container">
+    <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
-    <div id="typewriter-container" class="typewriter-container"></div>
+    <div id="typewriter-container">
+      <div class="typewriter" id="line1"></div>
+      <div class="typewriter" id="line2"></div>
+      <div class="typewriter" id="line3"></div>
+      <div class="typewriter" id="line4"></div>
+    </div>
+    <footer>
+      Conceptualized and developed by <span>Shubham Giri</span>.  
+      This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online sources.
+    </footer>
   </div>
-  <footer>
-    Conceptualized and developed by <span>Shubham Giri</span>.  
-    This formulation represents original thought and imagination, with no reference to prior documentation or online sources.
-  </footer>
 
   <script>
+    // Lines to type
     const lines = [
       "Life is an ∞ illusionary cycle.",
       "↓(S→Ƨ)↑ represents the loop we are stuck in.",
@@ -113,31 +131,38 @@
       "intervention Δ is required to enlighten E."
     ];
 
-    const typewriterContainer = document.getElementById("typewriter-container");
+    // Function to type each line
+    function typeLine(lineText, lineId, callback) {
+      const element = document.getElementById(lineId);
+      let charIndex = 0;
 
-    function typeLine(lineIndex = 0, charIndex = 0) {
-      if (lineIndex < lines.length) {
-        let currentLine = document.querySelector(`#line${lineIndex}`);
-        if (!currentLine) {
-          currentLine = document.createElement("div");
-          currentLine.id = `line${lineIndex}`;
-          currentLine.className = "typewriter-line";
-          typewriterContainer.appendChild(currentLine);
-        }
-        if (charIndex < lines[lineIndex].length) {
-          currentLine.textContent += lines[lineIndex][charIndex];
-          setTimeout(() => typeLine(lineIndex, charIndex + 1), 100);
+      function typeNextChar() {
+        if (charIndex < lineText.length) {
+          element.textContent += lineText[charIndex];
+          charIndex++;
+          setTimeout(typeNextChar, 100); // Speed of typing
         } else {
-          currentLine.style.borderRight = "none"; // Stop cursor after line finishes
-          setTimeout(() => typeLine(lineIndex + 1), 500); // Start next line
+          element.style.borderRight = 'none'; // Stop blinking cursor after line completes
+          if (callback) setTimeout(callback, 500); // Delay before starting the next line
         }
       }
+
+      typeNextChar();
     }
 
-    // Start typing on page load
-    window.onload = function () {
-      typeLine();
-    };
+    // Start typing lines sequentially
+    function startTyping() {
+      typeLine(lines[0], "line1", function () {
+        typeLine(lines[1], "line2", function () {
+          typeLine(lines[2], "line3", function () {
+            typeLine(lines[3], "line4");
+          });
+        });
+      });
+    }
+
+    // Trigger typing on page load
+    window.onload = startTyping;
   </script>
 </body>
 </html>
