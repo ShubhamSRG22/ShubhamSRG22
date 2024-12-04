@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Equation of Enlightenment</title>
   <style>
     /* Reset styles */
     * {
@@ -13,81 +14,50 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: url('https://images.unsplash.com/photo-1526504236159-f83ca5f7c5a2') no-repeat center center fixed;
-      background-size: cover;
-      color: #fff;
+      background-color: #2c3e50;
+      color: #ecf0f1;
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
+      text-align: center;
       overflow: hidden;
     }
 
     .container {
-      text-align: center;
       padding: 40px;
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0, 0, 0, 0.8);
       border-radius: 15px;
-      max-width: 900px;
-      box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
-      animation: fadeIn 2s ease-out;
-      overflow: hidden;
+      max-width: 700px;
+      box-shadow: 0px 15px 40px rgba(0, 0, 0, 0.9);
     }
 
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
+    h1 {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #f39c12;
+      margin-bottom: 20px;
+      text-transform: uppercase;
     }
 
     .equation {
-      font-size: 3rem;
+      font-size: 1.8rem;
       font-family: 'Courier New', Courier, monospace;
-      margin: 30px 0;
+      margin: 20px 0;
       color: #e74c3c;
-      text-shadow: 0px 0px 20px rgba(255, 0, 0, 0.6);
-      animation: equationAnimation 3s ease-in-out infinite;
+      text-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
     }
 
-    @keyframes equationAnimation {
-      0% {
-        transform: scale(1);
-        opacity: 0.5;
-      }
-      50% {
-        transform: scale(1.1);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 0.5;
-      }
-    }
-
-    /* Typewriter effect for character-by-character typing */
-    .typewriter {
-      font-size: 1.4rem;
+    #typewriter-container {
+      margin-top: 20px;
+      font-size: 1.2rem;
       line-height: 1.8;
-      color: #ecf0f1;
-      white-space: pre-wrap;
-      display: inline-block;
-      border-right: .15em solid orange; /* Blinking cursor effect */
-      animation: blinkCursor 0.75s step-end infinite;
-    }
-
-    /* Blink cursor animation */
-    @keyframes blinkCursor {
-      50% {
-        border-color: transparent;
-      }
+      color: #bdc3c7;
     }
 
     footer {
       margin-top: 30px;
-      font-size: 1.2rem;
+      font-size: 1rem;
       color: #bdc3c7;
     }
 
@@ -96,25 +66,28 @@
       font-weight: bold;
     }
 
-    footer:hover span {
+    footer span:hover {
       color: #3498db;
-      transform: translateY(-5px);
-      transition: all 0.3s ease-in-out;
+      text-decoration: underline;
     }
 
-    /* Styling for responsive layout */
+    /* Responsive design */
     @media screen and (max-width: 768px) {
       .container {
         padding: 20px;
-        max-width: 100%;
+        max-width: 90%;
+      }
+
+      h1 {
+        font-size: 1.8rem;
       }
 
       .equation {
-        font-size: 2rem;
+        font-size: 1.5rem;
       }
 
-      .typewriter {
-        font-size: 1.2rem;
+      #typewriter-container {
+        font-size: 1rem;
       }
     }
   </style>
@@ -124,72 +97,15 @@
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
     <div id="typewriter-container">
-      <div class="typewriter" id="line1"></div>
-      <div class="typewriter" id="line2"></div>
-      <div class="typewriter" id="line3"></div>
-      <div class="typewriter" id="line4"></div>
+      <p>Life is an ∞ illusionary cycle.</p>
+      <p>↓(S→Ƨ)↑ represents the loop we are stuck in.</p>
+      <p>To break free from this endless cycle,</p>
+      <p>intervention Δ is required to enlighten E.</p>
     </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
-      This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online or documented sources.
+      This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online sources.
     </footer>
   </div>
-
-  <script>
-    // Text content for each line
-    const lines = [
-      "Life is an ∞ illusionary cycle.",
-      "↓(S→Ƨ)↑ represents the loop we are stuck in.",
-      "To break free from this endless cycle,",
-      "intervention Δ is required to enlighten E."
-    ];
-
-    // Function to type each line with a typewriter effect
-    function typeLine(line, elementId, callback) {
-      const element = document.getElementById(elementId);
-      let charIndex = 0;
-      let typingSpeed = 100; // Speed of typing in ms
-
-      // Typing each character in the line
-      function typeNextChar() {
-        if (charIndex < line.length) {
-          element.innerText += line[charIndex];
-          charIndex++;
-          setTimeout(typeNextChar, typingSpeed);
-        } else {
-          // Stop the blinking cursor once line is fully typed
-          element.style.borderRight = 'none'; // Hide the blinking cursor
-          callback(); // Call the callback to type the next line
-        }
-      }
-
-      // Start typing
-      typeNextChar();
-    }
-
-    // Start typing the first line
-    function startTyping() {
-      typeLine(lines[0], "line1", function() {
-        setTimeout(function() {
-          typeLine(lines[1], "line2", function() {
-            setTimeout(function() {
-              typeLine(lines[2], "line3", function() {
-                setTimeout(function() {
-                  typeLine(lines[3], "line4", function() {
-                    // All lines are typed, no more actions needed
-                  });
-                }, 1000); // Delay before typing the next line
-              });
-            }, 1000); // Delay before typing the next line
-          });
-        }, 1000); // Delay before typing the next line
-      });
-    }
-
-    // Start typing when the page loads
-    window.onload = function() {
-      startTyping();
-    };
-  </script>
 </body>
 </html>
