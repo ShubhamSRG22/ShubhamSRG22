@@ -21,17 +21,19 @@
       justify-content: center;
       height: 100vh;
       overflow: hidden;
+      text-align: center; /* Center text for all devices */
     }
 
     .container {
-      text-align: center;
       padding: 40px;
       background: rgba(0, 0, 0, 0.6);
       border-radius: 15px;
       max-width: 900px;
+      width: 100%;
       box-shadow: 0px 15px 50px rgba(0, 0, 0, 0.7);
-      animation: fadeIn 2s ease-out;
       overflow: hidden;
+      animation: fadeIn 2s ease-out;
+      backdrop-filter: blur(5px);
     }
 
     @keyframes fadeIn {
@@ -41,6 +43,14 @@
       100% {
         opacity: 1;
       }
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #f39c12;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
     }
 
     .equation {
@@ -68,27 +78,19 @@
     }
 
     /* Typewriter effect for character-by-character typing */
-    .typewriter p {
+    .typewriter {
       font-size: 1.4rem;
       line-height: 1.8;
-      margin-bottom: 30px;
       color: #ecf0f1;
-      white-space: pre-wrap; /* Ensures the text wraps properly */
+      white-space: pre-wrap;
       display: inline-block;
       border-right: .15em solid orange; /* Blinking cursor effect */
-      animation: typewriter 10s steps(30) 1s forwards, blinkCursor 0.75s step-end infinite;
+      animation: blinkCursor 0.75s step-end infinite;
+      max-width: 90%; /* Ensure text does not overflow */
+      margin: 0 auto;
     }
 
-    /* Add more time in typewriter animation to make it type each character slowly */
-    @keyframes typewriter {
-      0% {
-        width: 0;
-      }
-      100% {
-        width: 100%;
-      }
-    }
-
+    /* Blink cursor animation */
     @keyframes blinkCursor {
       50% {
         border-color: transparent;
@@ -112,19 +114,22 @@
       transition: all 0.3s ease-in-out;
     }
 
-    /* Styling for responsive layout */
+    /* Responsive layout */
     @media screen and (max-width: 768px) {
-      .container {
-        padding: 20px;
-        max-width: 100%;
+      h1 {
+        font-size: 2.5rem;
       }
 
       .equation {
-        font-size: 2rem;
+        font-size: 2.5rem;
       }
 
-      p {
+      .typewriter {
         font-size: 1.2rem;
+      }
+
+      footer {
+        font-size: 1rem;
       }
     }
   </style>
@@ -133,10 +138,11 @@
   <div class="container">
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
-    <div class="typewriter">
-      <p id="typewriter-text">
-        Life is an ∞ illusionary cycle. ↓(S→Ƨ)↑ represents the loop we are stuck in. To break free from this endless cycle, intervention Δ is required to enlighten E.
-      </p>
+    <div id="typewriter-container">
+      <div class="typewriter" id="line1"></div>
+      <div class="typewriter" id="line2"></div>
+      <div class="typewriter" id="line3"></div>
+      <div class="typewriter" id="line4"></div>
     </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
@@ -145,29 +151,59 @@
   </div>
 
   <script>
-    const textElement = document.getElementById("typewriter-text");
-    const text = textElement.innerText;
-    textElement.innerText = ""; // Clear the text initially
+    // Text content for each line
+    const lines = [
+      "Life is an ∞ illusionary cycle.",
+      "↓(S→Ƨ)↑ represents the loop we are stuck in.",
+      "To break free from this endless cycle,",
+      "intervention Δ is required to enlighten E."
+    ];
 
-    let charIndex = 0;
-    let lineLength = 30; // Characters per line
-    let typingSpeed = 100; // Speed of typing in ms
-    const totalLength = text.length;
+    // Function to type each line with a typewriter effect
+    function typeLine(line, elementId, callback) {
+      const element = document.getElementById(elementId);
+      let charIndex = 0;
+      let typingSpeed = 100; // Speed of typing in ms
 
-    function typeNextChar() {
-      if (charIndex < totalLength) {
-        textElement.innerText += text[charIndex];
-        charIndex++;
-        setTimeout(typeNextChar, typingSpeed);
-      } else {
-        // Stop blinking cursor once typing is done
-        textElement.style.borderRight = 'none'; // Hide the blinking cursor
+      // Typing each character in the line
+      function typeNextChar() {
+        if (charIndex < line.length) {
+          element.innerText += line[charIndex];
+          charIndex++;
+          setTimeout(typeNextChar, typingSpeed);
+        } else {
+          // Stop the blinking cursor once line is fully typed
+          element.style.borderRight = 'none'; // Hide the blinking cursor
+          callback(); // Call the callback to type the next line
+        }
       }
+
+      // Start typing
+      typeNextChar();
     }
 
-    // Begin typing when page loads
-    window.onload = function () {
-      typeNextChar();
+    // Start typing the first line
+    function startTyping() {
+      typeLine(lines[0], "line1", function() {
+        setTimeout(function() {
+          typeLine(lines[1], "line2", function() {
+            setTimeout(function() {
+              typeLine(lines[2], "line3", function() {
+                setTimeout(function() {
+                  typeLine(lines[3], "line4", function() {
+                    // All lines are typed, no more actions needed
+                  });
+                }, 1000); // Delay before typing the next line
+              });
+            }, 1000); // Delay before typing the next line
+          });
+        }, 1000); // Delay before typing the next line
+      });
+    }
+
+    // Start typing when the page loads
+    window.onload = function() {
+      startTyping();
     };
   </script>
 </body>
