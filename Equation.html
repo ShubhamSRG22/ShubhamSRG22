@@ -21,20 +21,6 @@
       justify-content: center;
       height: 100vh;
       overflow: hidden;
-      filter: blur(5px); /* Apply blur effect to the background */
-      animation: backgroundAnimation 15s ease-in-out infinite;
-    }
-
-    @keyframes backgroundAnimation {
-      0% {
-        filter: blur(5px);
-      }
-      50% {
-        filter: blur(2px);
-      }
-      100% {
-        filter: blur(5px);
-      }
     }
 
     .container {
@@ -83,19 +69,22 @@
     }
 
     /* Typewriter animation for the paragraph text */
-    p {
+    .typewriter p {
       font-size: 1.4rem;
       line-height: 1.8;
       margin-bottom: 30px;
       color: #ecf0f1;
+      display: inline-block;
       white-space: nowrap;
       overflow: hidden;
       border-right: .15em solid orange; /* Create the blinking cursor effect */
-      width: 0;
-      animation: typewriter 4s steps(40) 1s forwards, blinkCursor 0.75s step-end infinite;
+      animation: typewriter 6s steps(60) 1s forwards, blinkCursor 0.75s step-end infinite;
     }
 
     @keyframes typewriter {
+      0% {
+        width: 0;
+      }
       100% {
         width: 100%;
       }
@@ -145,12 +134,14 @@
   <div class="container">
     <h1>The Equation of Enlightenment</h1>
     <div class="equation">∞ = i(↓(S→Ƨ)↑) + Δ→E</div>
-    <p>
-      Life is an ∞ illusionary cycle,<br>
-      ↓(S→Ƨ)↑ represents the loop we are stuck in.<br>
-      To break free from this endless cycle,<br>
-      intervention Δ is required to enlighten E.
-    </p>
+    <div class="typewriter">
+      <p>
+        Life is an ∞ illusionary cycle,<br>
+        ↓(S→Ƨ)↑ represents the loop we are stuck in.<br>
+        To break free from this endless cycle,<br>
+        intervention Δ is required to enlighten E.
+      </p>
+    </div>
     <footer>
       Conceptualized and developed by <span>Shubham Giri</span>.  
       This formulation is a product of original thought and imagination, with no prior existence or reference in established literature or online or documented sources.
